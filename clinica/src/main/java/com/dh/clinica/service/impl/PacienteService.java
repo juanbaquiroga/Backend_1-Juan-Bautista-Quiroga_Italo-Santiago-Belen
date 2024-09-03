@@ -1,6 +1,7 @@
 package com.dh.clinica.service.impl;
 
 import com.dh.clinica.entity.Paciente;
+import com.dh.clinica.exception.ResourceNotFoundException;
 import com.dh.clinica.repository.IPacienteRepository;
 import com.dh.clinica.service.IPacienteService;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,11 @@ public class PacienteService implements IPacienteService {
 
     @Override
     public void eliminarPaciente(Integer id) {
-        pacienteRepository.deleteById(id);
+        Optional<Paciente> pacienteEncontrado = pacienteRepository.findById(id);
+        if (pacienteEncontrado.isPresent()){
+            pacienteRepository.deleteById(id);
+        }else{
+            throw new ResourceNotFoundException("{\"mensaje\": \"El paciente "+id+" no fue encontrado\"}");
+        }
     }
 }

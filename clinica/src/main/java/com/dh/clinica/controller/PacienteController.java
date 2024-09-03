@@ -50,14 +50,14 @@ public class PacienteController {
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> eliminar(@PathVariable Integer id){
-        Optional<Paciente> paciente = pacienteService.buscarPorId(id);
-        if (paciente.isPresent()){
-            pacienteService.eliminarPaciente(id);
-            String jsonResponse = "{\"mensaje\": \"El paciente fue eliminado\"}";
-            return ResponseEntity.ok(jsonResponse);
-        }else{
-            return ResponseEntity.notFound().build();
-        }
+//        Optional<Paciente> paciente = pacienteService.buscarPorId(id);
+//        if (paciente.isPresent()){
+        pacienteService.eliminarPaciente(id);
+        String jsonResponse = "{\"mensaje\": \"El paciente fue eliminado\"}";
+        return ResponseEntity.ok(jsonResponse);
+//        }else{
+//            return ResponseEntity.notFound().build();
+//        }
     }
 }
 
