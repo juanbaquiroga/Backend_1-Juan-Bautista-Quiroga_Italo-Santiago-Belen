@@ -8,10 +8,7 @@ import com.dh.clinica.dto.request.TurnoRequestDto;
 import com.dh.clinica.entity.Odontologo;
 import com.dh.clinica.entity.Paciente;
 import com.dh.clinica.entity.Turno;
-import com.dh.clinica.repository.IOdontologoRepository;
-import com.dh.clinica.repository.IPacienteRepository;
 import com.dh.clinica.repository.ITurnoRepository;
-import com.dh.clinica.service.IOdontologoService;
 import com.dh.clinica.service.ITurnoService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -41,24 +38,16 @@ public class TurnoService implements ITurnoService {
 
     @Override
     public TurnoResponseDto guardarTurno(TurnoRequestDto turnoRequestDto) {
-        logger.info("turno service");
         Optional<Paciente> paciente = pacienteService.buscarPorId(turnoRequestDto.getPaciente_id());
-        logger.info("paciente: {}", paciente);
         Optional<Odontologo> odontologo = odontologoService.buscarPorId(turnoRequestDto.getOdontologo_id());
-        logger.info("odontologo: {}", odontologo);
         Turno turno = new Turno();
         Turno turnoDb = null;
         TurnoResponseDto turnoARetornar = null;
         if (paciente.isPresent() && odontologo.isPresent()) {
-            // mapear el turnoRequestDto a turno
-            logger.info("entro al if");
             turno.setPaciente(paciente.get());
             turno.setOdontologo(odontologo.get());
             turno.setFecha(LocalDate.parse(turnoRequestDto.getFecha()));
-            logger.info("turno seteado: "+turno);
-            // voy a persistir el turno
             turnoDb = turnoRepository.save(turno);
-            logger.info("turno guardado "+turnoDb);
 
             turnoARetornar = mapearATurnoResponse(turnoDb);
         }

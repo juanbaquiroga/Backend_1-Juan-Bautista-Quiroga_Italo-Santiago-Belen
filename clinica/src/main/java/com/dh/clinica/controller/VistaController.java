@@ -16,8 +16,6 @@ public class VistaController {
         this.pacienteService = pacienteService;
     }
 
-    // localhost:8080/20  -> @PathVariable
-    // localhost:8080?id=1  -> @RequestParams
     @GetMapping("/index")
     public String mostrarPacientePorId(Model model, @RequestParam Integer id){
         Paciente paciente = pacienteService.buscarPorId(id).get();
