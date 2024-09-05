@@ -1,5 +1,8 @@
 package com.dh.clinica.controller;
 
+import com.dh.clinica.dto.request.TurnoModificarDto;
+import com.dh.clinica.dto.request.TurnoRequestDto;
+import com.dh.clinica.dto.response.TurnoResponseDto;
 import com.dh.clinica.entity.Turno;
 import com.dh.clinica.service.impl.TurnoService;
 import org.springframework.http.HttpStatus;
@@ -19,8 +22,9 @@ public class TurnoController {
     }
 
     @PostMapping("/guardar")
-    public ResponseEntity<?> guardar(@RequestBody Turno turno){
-        Turno turnoGuardado = turnoService.guardarTurno(turno);
+    public ResponseEntity<?> guardar(@RequestBody TurnoRequestDto turnoRequestDto){
+
+        TurnoResponseDto turnoGuardado = turnoService.guardarTurno(turnoRequestDto);
         if (turnoGuardado != null){
             return ResponseEntity.ok(turnoGuardado);
         }else{
@@ -29,8 +33,8 @@ public class TurnoController {
     }
 
     @GetMapping("/buscar/{id}")
-    public ResponseEntity<Turno> buscarPorId(@PathVariable Integer id){
-        Optional<Turno> turno = turnoService.buscarPorId(id);
+    public ResponseEntity<TurnoResponseDto> buscarPorId(@PathVariable Integer id){
+        Optional<TurnoResponseDto> turno = turnoService.buscarPorId(id);
         if (turno.isPresent()){
             return ResponseEntity.ok(turno.get());
         }else{
@@ -44,26 +48,15 @@ public class TurnoController {
     }
 
     @PutMapping("/modificar")
-    public ResponseEntity<?> modificar(@RequestBody Turno turno){
-        Optional<Turno> turnoEncontrado = turnoService.buscarPorId(turno.getId());
-        if (turnoEncontrado.isPresent()){
-            turnoService.modificarTurno(turno);
-            String jsonResponse = "{\"mensaje\": \"El turno fue modificado\"}";
-            return ResponseEntity.ok(jsonResponse);
-        }else {
-            return ResponseEntity.badRequest().build();
-        }
+    public ResponseEntity<?> modificar(@RequestBody TurnoModificarDto turnoModificarDto){
+        turnoService.modificarTurno(turnoModificarDto);
+        return ResponseEntity.ok("{\"mensaje\": \"El paciente fue modificado\"}");
     }
 
-    @DeleteMapping("/eliminar/{id}")
+    @DeleteMapping("/eliminar</{id}")
     public ResponseEntity<?> modificar(@PathVariable Integer id){
-        Optional<Turno> turno = turnoService.buscarPorId(id);
-        if (turno.isPresent()){
-            turnoService.eliminarTurno(id);
-            String jsonResponse = "{\"mensaje\": \"El turno fue eliminado\"}";
-            return ResponseEntity.ok(jsonResponse);
-        }else{
-            return ResponseEntity.badRequest().build();
-        }
+        turnoService.eliminarTurno(id);
+        String jsonResponse = "{\"mensaje\": \"El turno fue eliminado\"}";
+        return ResponseEntity.ok(jsonResponse);
     }
 }
