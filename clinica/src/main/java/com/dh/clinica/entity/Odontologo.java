@@ -26,7 +26,7 @@ public class Odontologo {
     private String apellido;
     private String nombre;
 
-    @OneToMany(mappedBy = "odontologo")
+    @OneToMany(mappedBy = "odontologo", cascade = CascadeType.REMOVE)
     @JsonManagedReference(value = "odontologo-turno")
     private Set<Turno> turnoSet;
 

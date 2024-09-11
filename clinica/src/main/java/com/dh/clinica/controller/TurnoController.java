@@ -50,13 +50,19 @@ public class TurnoController {
     @PutMapping("/modificar")
     public ResponseEntity<?> modificar(@RequestBody TurnoModificarDto turnoModificarDto){
         turnoService.modificarTurno(turnoModificarDto);
-        return ResponseEntity.ok("{\"mensaje\": \"El paciente fue modificado\"}");
+        return ResponseEntity.ok("{\"mensaje\": \"El turno fue modificado\"}");
     }
 
-    @DeleteMapping("/eliminar</{id}")
+    @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<?> modificar(@PathVariable Integer id){
         turnoService.eliminarTurno(id);
         String jsonResponse = "{\"mensaje\": \"El turno fue eliminado\"}";
         return ResponseEntity.ok(jsonResponse);
+    }
+
+    ///buscar/paciente?nombre=nombrePaciente&apellido=apellidoPaciente
+    @GetMapping("/buscar/paciente")
+    public ResponseEntity<List<TurnoResponseDto>> buscarPorNombreYApellidoPaciente(@RequestParam String nombre, @RequestParam String apellido){
+        return ResponseEntity.ok(turnoService.buscarTurnoPorNombreYApellido(nombre, apellido));
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -92,4 +93,17 @@ public class TurnoService implements ITurnoService {
         turnoResponseDto.setPacienteResponseDto(modelMapper.map(turno.getPaciente(), PacienteResponseDto.class));
         return turnoResponseDto;
     }
+
+
+    public List<TurnoResponseDto> buscarTurnoPorNombreYApellido(String nombrePaciente, String apellidoPaciente){
+        List<Turno> turnos = turnoRepository.buscarTurnoPorNombreYAppellidoPaciente(nombrePaciente, apellidoPaciente);
+        List<TurnoResponseDto> turnosResponse = new ArrayList<>();
+        for (Turno turno: turnos){
+            TurnoResponseDto turnoResponse = mapearATurnoResponse(turno);
+            turnosResponse.add(turnoResponse);
+        }
+        return turnosResponse;
+    }
+
+
 }
