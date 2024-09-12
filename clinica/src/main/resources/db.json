@@ -1,0 +1,20 @@
+{
+"odontologos": [
+{
+        "id": 1,
+        "nombre": "Dr. Juan Pérez",
+        "especialidad": "Ortodoncia",
+        "paciente": "María González",
+        "contacto": "juan.perez@odontoclinica.com",
+        "turno": "2024-09-10"
+},
+{
+        "id": 2,
+        "nombre": "Dra. Ana López",
+        "especialidad": "Endodoncia",
+        "paciente": "Carlos Rodríguez",
+        "contacto": "ana.lopez@odontoclinica.com",
+        "turno": "2024-09-15"
+}
+]
+}

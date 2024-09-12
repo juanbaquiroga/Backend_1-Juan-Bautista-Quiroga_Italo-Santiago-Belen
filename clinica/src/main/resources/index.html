@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Odontólogos CRUD</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Consultorio Odontológico Sonrisas</h1>
+        </header>
+        <div class="container">
+            <h1>Gestión de Odontólogos</h1>
+    
+            <form id="odontologoForm">
+                <input type="text" id="nombre" placeholder="Nombre" required>
+                <input type="text" id="especialidad" placeholder="Especialidad" required>
+                <input type="text" id="paciente" placeholder="Paciente" required>
+                <input type="email" id="contacto" placeholder="Contacto" required>
+                <input type="date" id="turno" placeholder="Fecha de Turno" required>
+                <button type="submit">Guardar</button>
+            </form>
+    
+            <h2>Lista de Odontólogos</h2>
+            <div id="odontologosContainer"></div>
+        </div>
+        <footer>
+            <p>Gracias por su visita</p>
+        </footer>
+        <script type="module" src="/src/app.js"></script>
+</body>
+</body>
+</html>
