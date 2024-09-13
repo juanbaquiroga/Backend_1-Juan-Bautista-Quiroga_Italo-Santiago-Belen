@@ -34,7 +34,13 @@ public class PacienteService implements IPacienteService {
 
     @Override
     public void modificarPaciente(Paciente paciente) {
-        pacienteRepository.save(paciente);
+        Optional<Paciente> pacienteEncontrado = pacienteRepository.findById(paciente.getId());
+        if (pacienteEncontrado.isPresent()){
+            pacienteRepository.save(paciente);
+
+        }else{
+            throw new ResourceNotFoundException("El paciente no fue encontrado");
+        }
     }
 
     @Override
